@@ -7,7 +7,13 @@
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "infra:up": "docker compose up -d",
+    "infra:down": "docker compose down",
+    "infra:reset": "docker compose down -v && docker compose up -d",
+    "infra:logs": "docker compose logs -f",
+    "db:logs": "docker compose logs -f postgres",
+    "db:psql": "docker compose exec postgres psql -U booking -d booking"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
