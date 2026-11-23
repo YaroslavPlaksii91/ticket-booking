@@ -173,7 +173,7 @@ erDiagram
 
 ## Key decisions
 
-- **EVENT vs SESSION.** `EVENT` is *what* happens (title, description, poster, refund rules) and is created once. `SESSION` is *where and when* (venue, date, sales period, seats, prices). A tour across 5 cities or a play every Saturday is one event with many sessions. Seats and bookings belong to a session.
+- **EVENT vs SESSION.** `EVENT` is _what_ happens (title, description, poster, refund rules) and is created once. `SESSION` is _where and when_ (venue, date, sales period, seats, prices). A tour across 5 cities or a play every Saturday is one event with many sessions. Seats and bookings belong to a session.
 - **Price categories.** Organizers price by category ("Parterre — 800 UAH, Balcony — 500 UAH"), not seat by seat. Each `EVENT_SEAT` points to a `PRICE_CATEGORY` of its session.
 - **Sales rules on the session**: tickets can be bought only between `salesStartAt` and `salesEndAt`, and no more than `maxTicketsPerOrder` per booking (protection from bots and scalpers).
 - **Organizer verification.** Any user can apply to become an organizer with FOP/company details. An admin approves the `ORGANIZER_PROFILE`, and only then the user gets the `ORGANIZER` role.

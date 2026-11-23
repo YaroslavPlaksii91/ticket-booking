@@ -1,5 +1,20 @@
 {
   "name": "ticket-booking",
   "private": true,
-  "scripts": {}
+  "scripts": {
+    "dev:express": "pnpm --filter @booking/api-express dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.10.1",
+    "typescript": "catalog:",
+    "typescript-eslint": "^8.73.0"
+  }
 }

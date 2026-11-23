@@ -7,7 +7,7 @@ flowchart TD
     A[Event catalog] --> B[Event page]
     B --> B2[Choose city and date: session]
     B2 --> S{Sales open?}
-    S -- Not yet / closed --> S2[Show sales dates] 
+    S -- Not yet / closed --> S2[Show sales dates]
     S -- Yes --> C[Seat map with price categories]
     C --> D[Select seats, up to the per-order limit]
     D --> E{Logged in with verified email?}
