@@ -1,3 +1,1 @@
-import { greet } from './utils/greet.js';
-
-console.log(greet('ticket-booking API'));
+console.log('ticket-booking API');
