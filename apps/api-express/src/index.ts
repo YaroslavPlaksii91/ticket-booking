@@ -1,7 +1,8 @@
 import { app } from './app.js';
+import { logger } from './lib/logger.js';
 
-const PORT = 3000;
+const PORT = 4000;
 
 app.listen(PORT, () => {
-  console.log(`API listening on http://localhost:${PORT}`);
+  logger.info(`API listening on http://localhost:${PORT}`);
 });
