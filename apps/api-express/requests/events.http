@@ -1,0 +1,28 @@
+@baseUrl = http://localhost:4000
+
+### Create event
+# @name createEvent
+POST {{baseUrl}}/events
+Content-Type: application/json
+
+{
+  "title": "Концерт",
+  "description": "Великий концерт"
+}
+
+### List events
+GET {{baseUrl}}/events
+
+### Get event by id
+GET {{baseUrl}}/events/{{createEvent.response.body.id}}
+
+### Publish event
+PATCH {{baseUrl}}/events/{{createEvent.response.body.id}}
+Content-Type: application/json
+
+{
+  "status": "PUBLISHED"
+}
+
+### Delete event
+DELETE {{baseUrl}}/events/{{createEvent.response.body.id}}
