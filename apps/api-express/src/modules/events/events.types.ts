@@ -1,4 +1,4 @@
-export type EventStatus = 'DRAFT' | 'PUBLISHED' | 'HIDDEN' | 'ARCHIVED';
+import type { EventStatus } from './events.schemas.js';
 
 export interface Event {
   id: string;
@@ -7,7 +7,3 @@ export interface Event {
   status: EventStatus;
   createdAt: string;
 }
-
-export type CreateEventInput = Pick<Event, 'title' | 'description'>;
-
-export type UpdateEventInput = Partial<Pick<Event, 'title' | 'description' | 'status'>>;

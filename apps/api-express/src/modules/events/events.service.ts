@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
-import type { CreateEventInput, Event, UpdateEventInput } from './events.types.js';
+import type { Event } from './events.types.js';
+import type { CreateEventInput, UpdateEventInput } from './events.schemas.js';
 
 const events: Event[] = [];
 

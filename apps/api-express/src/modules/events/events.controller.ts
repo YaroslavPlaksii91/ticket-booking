@@ -6,8 +6,8 @@ import {
   listEvents,
   updateEvent,
 } from './events.service.js';
-import type { CreateEventInput, UpdateEventInput } from './events.types.js';
-import type { IdParams } from '../../common/http.types.js';
+import type { CreateEventInput, UpdateEventInput } from './events.schemas.js';
+import type { IdParams } from '../../common/http.schemas.js';
 
 export function listEventsController(_req: Request, res: Response) {
   res.json(listEvents());
@@ -22,13 +22,19 @@ export function getEventController(req: Request<IdParams>, res: Response) {
   res.json(event);
 }
 
-export function createEventController(req: Request, res: Response) {
-  const event = createEvent(req.body as CreateEventInput);
+export function createEventController(
+  req: Request<unknown, unknown, CreateEventInput>,
+  res: Response,
+) {
+  const event = createEvent(req.body);
   res.status(201).json(event);
 }
 
-export function updateEventController(req: Request<IdParams>, res: Response) {
-  const event = updateEvent(req.params.id, req.body as UpdateEventInput);
+export function updateEventController(
+  req: Request<IdParams, unknown, UpdateEventInput>,
+  res: Response,
+) {
+  const event = updateEvent(req.params.id, req.body);
   if (!event) {
     res.status(404).json({ message: 'Event not found' });
     return;

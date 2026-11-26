@@ -26,3 +26,42 @@ Content-Type: application/json
 
 ### Delete event
 DELETE {{baseUrl}}/events/{{createEvent.response.body.id}}
+
+### Validation: wrong type and extra field
+POST {{baseUrl}}/events
+Content-Type: application/json
+
+{
+  "title": 123,
+  "id": "hack"
+}
+
+### Validation: blank title
+POST {{baseUrl}}/events
+Content-Type: application/json
+
+{
+  "title": "   "
+}
+
+### Validation: wrong status
+PATCH {{baseUrl}}/events/{{createEvent.response.body.id}}
+Content-Type: application/json
+
+{
+  "status": "WRONG"
+}
+
+### Validation: invalid id
+GET {{baseUrl}}/events/abc
+
+### Validation: invalid id and status together
+PATCH {{baseUrl}}/events/abc
+Content-Type: application/json
+
+{
+  "status": "WRONG"
+}
+
+### Not found: valid UUID that doesn't exist
+GET {{baseUrl}}/events/00000000-0000-4000-8000-000000000000

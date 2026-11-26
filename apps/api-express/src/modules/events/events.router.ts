@@ -1,4 +1,7 @@
 import { Router } from 'express';
+import { idParamsSchema } from '../../common/http.schemas.js';
+import { validate } from '../../middlewares/validate.js';
+import { createEventSchema, updateEventSchema } from './events.schemas.js';
 import {
   createEventController,
   deleteEventController,
@@ -10,7 +13,11 @@ import {
 export const eventsRouter = Router();
 
 eventsRouter.get('/', listEventsController);
-eventsRouter.get('/:id', getEventController);
-eventsRouter.post('/', createEventController);
-eventsRouter.patch('/:id', updateEventController);
-eventsRouter.delete('/:id', deleteEventController);
+eventsRouter.get('/:id', validate({ params: idParamsSchema }), getEventController);
+eventsRouter.post('/', validate({ body: createEventSchema }), createEventController);
+eventsRouter.patch(
+  '/:id',
+  validate({ params: idParamsSchema, body: updateEventSchema }),
+  updateEventController,
+);
+eventsRouter.delete('/:id', validate({ params: idParamsSchema }), deleteEventController);
