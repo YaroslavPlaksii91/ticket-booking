@@ -14,12 +14,7 @@ export function listEventsController(_req: Request, res: Response) {
 }
 
 export function getEventController(req: Request<IdParams>, res: Response) {
-  const event = getEventById(req.params.id);
-  if (!event) {
-    res.status(404).json({ message: 'Event not found' });
-    return;
-  }
-  res.json(event);
+  res.json(getEventById(req.params.id));
 }
 
 export function createEventController(
@@ -34,19 +29,10 @@ export function updateEventController(
   req: Request<IdParams, unknown, UpdateEventInput>,
   res: Response,
 ) {
-  const event = updateEvent(req.params.id, req.body);
-  if (!event) {
-    res.status(404).json({ message: 'Event not found' });
-    return;
-  }
-  res.json(event);
+  res.json(updateEvent(req.params.id, req.body));
 }
 
 export function deleteEventController(req: Request<IdParams>, res: Response) {
-  const deleted = deleteEvent(req.params.id);
-  if (!deleted) {
-    res.status(404).json({ message: 'Event not found' });
-    return;
-  }
+  deleteEvent(req.params.id);
   res.status(204).end();
 }

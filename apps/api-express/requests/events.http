@@ -65,3 +65,12 @@ Content-Type: application/json
 
 ### Not found: valid UUID that doesn't exist
 GET {{baseUrl}}/events/00000000-0000-4000-8000-000000000000
+
+### Error: broken JSON
+POST {{baseUrl}}/events
+Content-Type: application/json
+
+{ broken json }
+
+### Not found: unknown route
+GET {{baseUrl}}/nothing

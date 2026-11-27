@@ -1,12 +1,13 @@
 import type { NextFunction, Request, Response } from 'express';
 import type { ZodType } from 'zod';
+import { ValidationError } from '../common/errors.js';
 
 interface ValidationSchemas {
   params?: ZodType;
   body?: ZodType;
 }
 
-interface ValidationError {
+interface ValidationIssue {
   location: 'params' | 'body';
   path: string;
   message: string;
@@ -14,7 +15,7 @@ interface ValidationError {
 
 export function validate(schemas: ValidationSchemas) {
   return (req: Request, res: Response, next: NextFunction) => {
-    const errors: ValidationError[] = [];
+    const errors: ValidationIssue[] = [];
 
     for (const location of ['params', 'body'] as const) {
       const schema = schemas[location];
@@ -33,7 +34,7 @@ export function validate(schemas: ValidationSchemas) {
     }
 
     if (errors.length > 0) {
-      res.status(400).json({ message: 'Validation failed', errors });
+      next(new ValidationError(errors));
       return;
     }
 
