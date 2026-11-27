@@ -1,11 +1,10 @@
 import { pino } from 'pino';
-
-const isDev = process.env.NODE_ENV !== 'production';
+import { config } from '../config.js';
 
 export const logger = pino({
-  level: process.env.LOG_LEVEL ?? (isDev ? 'debug' : 'info'),
+  level: config.LOG_LEVEL ?? (config.isProduction ? 'info' : 'debug'),
   redact: ['req.headers.authorization', 'req.headers.cookie'],
-  ...(isDev && {
+  ...(!config.isProduction && {
     transport: {
       target: 'pino-pretty',
       options: {

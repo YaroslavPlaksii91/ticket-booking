@@ -7,15 +7,14 @@ import { errorHandler } from './middlewares/error-handler.js';
 import { notFound } from './middlewares/not-found.js';
 import { healthRouter } from './modules/health/health.router.js';
 import { eventsRouter } from './modules/events/events.router.js';
-
-const allowedOrigins = (process.env.CORS_ORIGINS ?? 'http://localhost:3000').split(',');
+import { config } from './config.js';
 
 export const app = express();
 
 app.use(requestId);
 app.use(httpLogger);
 app.use(helmet());
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+app.use(cors({ origin: config.CORS_ORIGINS, credentials: true }));
 app.use(express.json({ limit: '100kb' }));
 
 app.use('/health', healthRouter);
